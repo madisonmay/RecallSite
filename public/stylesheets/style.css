@@ -1,8 +1,50 @@
+* {
+/*    border: 2px solid black;*/
+}
+
+html {
+    background-image: url('/images/bedge_grunge.png');
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url('/images/bedge_grunge.png');
 }
 
 a {
   color: #00B7FF;
 }
+
+#login {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.description {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.title {
+    font-size: 72px;
+    text-align: center;
+}
+
+.fixwidth {
+    width: 30%;
+    margin: 0px auto;
+    padding: 25px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#register {
+    margin-bottom: 15px;
+}
+
+.centered {
+  text-align: center;
+}
+
