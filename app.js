@@ -43,40 +43,8 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/login/facebook/', Facebook.loginRequired(scope), user.fb_login);
 app.get('/connect', user.connect);
-app.get('/connect/facebook', user.fb_connect);
-app.get('/connect/twitter', user.tw_connect);
-// app.get('/twitter', user.tw_login);
-
-var twitter = rem.connect('twitter.com').configure({
-  key: 'PGOuhd7q3ZFScuswcHSorA',
-  secret: 'aUrhiEb02qkeNwsCF7AMkZvCFWs9mbi42wq32q0wj8'
-});
-
-var oauth = rem.oauth(twitter, 'http://' + app.get('host') + '/oauth/callback');
-
-app.get('/login/twitter/', oauth.login());
-
-function loginRequired (req, res, next) {
-  if (!req.twitter) {
-    res.redirect('/');
-  } else {
-    next();
-  }
-}
-
-app.use(oauth.middleware(function (req, res, next) {
-  console.log("The user is now authenticated.");
-  res.redirect('/twitter');
-}));
-
-// Save the user session as req.user.
-app.all('/*', function (req, res, next) {
-  req.twitter = oauth.session(req);
-  next();
-});
+app.get('/search/facebook', user.fb_search)
 
 app.listen(app.get('port'), function () {
   console.log('Listening on http://' + app.get('host'))
 });
-
-app.get('/twitter', loginRequired, user.tw_login);

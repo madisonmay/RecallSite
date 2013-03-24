@@ -53,60 +53,18 @@ exports.fb_login = function(req, res){
     });
 };
 
-exports.tw_login = function(req, res){
-    req.twitter('account/verify_credentials').get(function (err, user) {
-        if (err) {
-            console.log(err)
-        } else {
-            User.findOne({tw_id : user.id}).exec(function(err, db_user) {
-
-                //User in database
-                if (db_user) {
-                    req.session.user = db_user.tw_id;
-                    res.redirect('/connect');
-                    // get_friends(db_user.fb_id, db_user._id, req, res, function(friend_list){
-                    //     db_user.friend_list = friend_list;
-                    //     db_user.save();
-                    //
-                    // });
-                }
-
-                //User DNE
-                else if (!db_user || !db_user.length) {
-                    var new_user = new User({fb_id: user.id, first_name: user.first_name,
-                                             last_name: user.last_name});
-                    new_user.save(function(err) {
-                        if(err) {
-                            console.log("Error: ", err);
-                        } else {
-                            req.session.user = new_user.tw_id;
-                            console.log("User saved.");
-                            res.redirect('/connect');
-                        }
-                    });
-                }
-
-                //Something else unexpected happens
-                else {
-                    res.send("Recall is currently experiencing issues.");
-                }
-            });
-        }
-    });
-}
-
-exports.tw_connect = function(req, res){
-    req.twitter('account/verify_credentials').get(function (err, profile) {
-        console.log(profile);
-        res.send('Hi ' + profile.screen_name + '!');
-    });
-}
-
-exports.fb_connect = function(req, res){
-    res.send('Success')
-}
-
 exports.connect = function(req, res) {
     res.render('connect', {'title': 'Connect'});
     console.log(req.session.user);
+}
+
+exports.fb_search = function(req, res) {
+    console.log(req.query.q)
+    var url = '/me/home?q=' + req.query.q + '&fields=from,message';
+    console.log(url);
+    req.facebook.api(url, function(err, data) {
+        console.log(err);
+        console.log(data);
+        res.send(data)
+    });
 }
