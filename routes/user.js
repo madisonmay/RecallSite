@@ -60,7 +60,7 @@ exports.connect = function(req, res) {
 
 exports.fb_search = function(req, res) {
     console.log(req.query.q)
-    var url = '/me/home?' + 'limit=200';
+    var url = '/me/home?q=' + req.query.q + '&fields=from,message';
     console.log(url);
     req.facebook.api(url, function(err, data) {
         console.log(err);
