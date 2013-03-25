@@ -37,9 +37,9 @@ app.configure('production', function () {
   app.set('host', process.env.HOST);
 });
 
-var scope = {scope: ['']};
+var scope = {scope: ['read_stream']};
 
-app.get('/', routes.index);
+app.get('/', Facebook.loginRequired(scope), routes.index);
 app.get('/users', user.list);
 app.get('/login/facebook/', Facebook.loginRequired(scope), user.fb_login);
 app.get('/connect', user.connect);
