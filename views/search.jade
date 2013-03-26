@@ -3,8 +3,15 @@ extends layout
 block content
 	div.title.well
 		| <b> Recall </b>
-	div.span6.well
-		h3.centered #{username}
-		h4 Searching your social media for: #{query}
-	div.span10.well
+	div.span4.well
+		div.span4.centered
+			if (user.fb_id)
+				a.pull-left(href='http://www.facebook.com/'+user.fb_id)
+					img(src='http://graph.facebook.com/'+user.fb_id+'/picture')
+				a.pull-right(href='http://www.facebook.com/',style='margin:auto')
+					img(src='/images/facebok-icon.png', style='width:2em;height:2em;margin-top:-5px')
+			h3 #{username}
+		div.square.botborder
+			h4 Searching for: #{query}
+	div.span12.well
 		include _posts.jade

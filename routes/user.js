@@ -100,6 +100,7 @@ exports.fb_search = function(req, res) {
         console.log(filtered)
         res.render('search', {
             title: 'Recall',
+            user: req.session.user,
             query: req.query.q,
             username: req.session.user.first_name,
             posts: filtered

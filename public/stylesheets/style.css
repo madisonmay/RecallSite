@@ -46,6 +46,8 @@ a {
 
 .centered {
   text-align: center;
+  margin:auto;
+  float:none;
 }
 
 .botborder {
@@ -57,11 +59,13 @@ a {
 }
 
 .userlink {
-  font-size: 1.5em;
+  font-size: 1.25em;
   color: #333333;
+  padding-left:10px;
 }
 
 .message {
-  font-size: 1.25em;
+  font-size: 1em;
   color: #000000;
+  text-align:left;
 }
