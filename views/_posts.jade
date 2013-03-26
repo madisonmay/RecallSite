@@ -1,10 +1,9 @@
-div.page-header.centered
-  h2 Posts
+h2.centered Posts
 
 if (posts == false || posts.length == 0)
   h4.center No posts were found!
 else
-  for post in post
+  for post in posts
       div.square.botborder
-        a(src='http://www.facebook.com/'+post.ui) #{post.username} from #{post.type}
-        p #{post.comment}
+        a.userlink(href='http://www.facebook.com/'+post.post_id) #{post.username} from #{post.type}
+        p.message #{post.message}

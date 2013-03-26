@@ -5,6 +5,8 @@
 var Models = require('../models.js');
 var User = Models.User;
 
+String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
+
 exports.list = function(req, res){
   res.send("respond with a resource");
 };
@@ -58,18 +60,49 @@ exports.connect = function(req, res) {
     console.log('user', req.session.user);
 }
 
+function selectiveAdd(post, data, i, field, content, query) {
+    if (String(data[i].message).toLowerCase().contains(query)) {
+        post[field] = data[i][content];
+    } else if (query[l-1] == 's') {
+        if (String(data[i].message).toLowerCase().contains(query.slice(0, l-1))) {
+            post[field] = data[i][content];
+        }
+    } else if (rquery.slice(l-2, l) == 'es') {
+        if (String(data[i].message).toLowerCase().contains(query.slice(0, l-2))) {
+            post[field] = data[i][content];
+        }
+    } else {
+        post[field] = '';
+    }
+    return post
+}
+
 exports.fb_search = function(req, res) {
-    console.log(req.query.q)
     var url = '/me/home?q=' + req.query.q;
-    console.log(url);
     req.facebook.api(url, function(err, data) {
+        var filtered = []
         console.log(err);
         console.log(data);
+        data = data.data
+        for (var i=0; i<data.length; i++) {
+            if (!('category' in data[i].from)){
+                filtered.push({});
+                var len = filtered.length;
+                var post = filtered[len-1];
+                post['post_id'] = data[i].id
+                post['type'] = 'facebook';
+                post['uid'] = data[i].from.id;
+                post['username'] = data[i].from.name;
+                l = req.query.q.length;
+                post = selectiveAdd(post, data, i, 'message', 'message', req.query.q)
+            }
+        }
+        console.log(filtered)
         res.render('search', {
             title: 'Recall',
             query: req.query.q,
             username: req.session.user.first_name,
-            posts: []
+            posts: filtered
         })
     });
 }

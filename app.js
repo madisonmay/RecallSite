@@ -40,10 +40,10 @@ app.configure('production', function () {
 var scope = {scope: ['read_stream']};
 
 app.get('/', Facebook.loginRequired(scope), routes.index);
-app.get('/users', user.list);
+app.get('/users', Facebook.loginRequired(scope), user.list);
 app.get('/login/facebook/', Facebook.loginRequired(scope), user.fb_login);
-app.get('/connect', user.connect);
-app.get('/search/facebook', user.fb_search)
+app.get('/connect', Facebook.loginRequired(scope), user.connect);
+app.get('/search/facebook', Facebook.loginRequired(scope), user.fb_search)
 
 app.listen(app.get('port'), function () {
   console.log('Listening on http://' + app.get('host'))
