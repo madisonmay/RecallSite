@@ -1,0 +1,10 @@
+div.page-header.centered
+  h2 Posts
+
+if (posts == false || posts.length == 0)
+  h4.center No posts were found!
+else
+  for post in post
+      div.square.botborder
+        a(src='http://www.facebook.com/'+post.ui) #{post.username} from #{post.type}
+        p #{post.comment}

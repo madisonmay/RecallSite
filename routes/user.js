@@ -20,7 +20,7 @@ exports.fb_login = function(req, res){
 
                 //User in database
                 if (db_user) {
-                    req.session.user = db_user.fb_id;
+                    req.session.user = db_user;
                     res.redirect('/connect');
                     // get_friends(db_user.fb_id, db_user._id, req, res, function(friend_list){
                     //     db_user.friend_list = friend_list;
@@ -37,7 +37,7 @@ exports.fb_login = function(req, res){
                         if(err) {
                             console.log("Error: ", err);
                         } else {
-                            req.session.user = new_user.fb_id;
+                            req.session.user = new_user;
                             console.log("User saved.");
                             res.redirect('/connect');
                         }
@@ -55,7 +55,7 @@ exports.fb_login = function(req, res){
 
 exports.connect = function(req, res) {
     res.render('connect', {'title': 'Connect'});
-    console.log(req.session.user);
+    console.log('user', req.session.user);
 }
 
 exports.fb_search = function(req, res) {
@@ -65,6 +65,11 @@ exports.fb_search = function(req, res) {
     req.facebook.api(url, function(err, data) {
         console.log(err);
         console.log(data);
-        res.send(data)
+        res.render('search', {
+            title: 'Recall',
+            query: req.query.q,
+            username: req.session.user.first_name,
+            posts: []
+        })
     });
 }

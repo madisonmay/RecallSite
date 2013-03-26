@@ -1,5 +1,10 @@
 extends layout
 
 block content
-    div.title
-        | <b> Facebook search for #{query} </b>
+	div.title.well
+		| <b> Recall </b>
+	div.span6.well
+		h3.centered #{username}
+		h4 Searching your social media for: #{query}
+	div.span10.well
+		include _posts.jade
