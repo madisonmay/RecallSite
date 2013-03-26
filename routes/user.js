@@ -62,15 +62,17 @@ exports.connect = function(req, res) {
 
 function selectiveAdd(post, data, i, field, content, query) {
     if (String(data[i].message).toLowerCase().contains(query)) {
-        post[field] = data[i][content]
+        post[field] = data[i][content];
     } else if (query[l-1] == 's') {
         if (String(data[i].message).toLowerCase().contains(query.slice(0, l-1))) {
-            post[field] = data[i][content]
+            post[field] = data[i][content];
         }
     } else if (rquery.slice(l-2, l) == 'es') {
         if (String(data[i].message).toLowerCase().contains(query.slice(0, l-2))) {
-            post[field] = data[i][content]
+            post[field] = data[i][content];
         }
+    } else {
+        post[field] = '';
     }
     return post
 }
@@ -84,7 +86,7 @@ exports.fb_search = function(req, res) {
         for (var i=0; i<data.length; i++) {
             if (!('category' in data[i].from)){
                 filtered.push({});
-                len = filtered.length
+                var len = filtered.length;
                 var post = filtered[len-1];
                 post['post_id'] = data[i].id
                 post['type'] = 'facebook';
