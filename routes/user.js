@@ -67,7 +67,7 @@ function selectiveAdd(post, data, i, field, content, query) {
         if (String(data[i].message).toLowerCase().contains(query.slice(0, l-1))) {
             post[field] = data[i][content];
         }
-    } else if (rquery.slice(l-2, l) == 'es') {
+    } else if (query.slice(l-2, l) == 'es') {
         if (String(data[i].message).toLowerCase().contains(query.slice(0, l-2))) {
             post[field] = data[i][content];
         }
