@@ -5,7 +5,7 @@
 var Models = require('../models.js');
 var User = Models.User;
 
-String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
+String.prototype.contains = function(it) { return this.toLowerCase().indexOf(it.toLowerCase()) != -1; };
 
 exports.list = function(req, res){
   res.send("respond with a resource");
@@ -103,8 +103,8 @@ exports.tw_login = function(req, res){
 };
 
 exports.connect = function(req, res) {
-    res.render('connect', {'title': 'Connect'});
     console.log(req.session.user);
+    res.render('connect', {'title': 'Connect', 'user': req.session.user});
 }
 
 exports.fb_connect = function(req, res) {
@@ -199,8 +199,45 @@ exports.fb_search = function(req, res) {
                     }
                 }
             }
+        res.send(filtered);
         }
-        console.log(filtered)
-        res.send(data)
     });
 }
+
+exports.tw_search = function(req, res) {
+    var url = 'statuses/home_timeline?count=200'
+    req.twitter(url).get(function(err, data) {
+
+        var filtered = []
+        data.forEach(function (tweet) {
+            if (tweet.text.contains(req.query.q)) {
+                filtered.push({});
+                var len = filtered.length;
+                var post = filtered[len-1];
+                post['post-id'] = tweet.id_str;
+                post['type'] = 'twitter';
+                post['uid'] = tweet.user.id;
+                post['username'] = tweet.user.name;
+                post['message'] = tweet.text;
+            }
+        });
+        res.send(filtered);
+    });
+}
+
+// exports.search = function(req, res) {
+//     var result = []
+//     if (req.twitter) {
+//         var data = tw_search(req, res);
+//         data.forEach(function (tweet) {
+//             result.push(tweet);
+//         });
+//     }
+//     if (req.facebook) {
+//         var data = fb_search(req, res);
+//         data.forEach(function (post) {
+//             result.push(post);
+//         });
+//     }
+//     console.log(result)
+// }

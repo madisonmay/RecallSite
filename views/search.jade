@@ -1,5 +1,14 @@
 extends layout
 
+block scripts
+    script
+        $(document).ready(function() {
+            console.log('Ready')
+            $.get("https://twitter.com/search/timeline?q=dog", function(data) {
+                console.log(data);
+            });
+        });
+
 block content
     div.title
         | <b> Facebook search for #{query} </b>

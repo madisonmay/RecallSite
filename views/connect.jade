@@ -4,10 +4,35 @@ block content
     div.centered
         div.title
             | Connect more accounts
-        a(href='/connect/facebook/')
-            img(id='loginbutton', src='images/facebok-icon.png')
-        a(href='/connect/twitter/')
-            img(id='loginbutton', src='images/twitter-icon.png')
-        a(href='/connect/gplus/')
-            img(id='loginbutton', src='images/gplus-icon.png')
+        div.fix
+            a(href='/connect/facebook/')
+                img.fb.sm(id='fb', src='images/facebok-icon.png')
+        div.fix
+            a(href='/connect/twitter/')
+                img.tw.sm(id='tw', src='images/twitter-icon.png')
+        div.fix
+            a(href='/connect/gplus/')
+                img.gp.sm(id='gp', src='images/gplus-icon.png')
+
+    script
+        $(document).ready(function() {
+            var fb = '#{user.fb_id}'
+            var tw = '#{user.tw_id}'
+            console.log(fb)
+            console.log(tw)
+            if (fb) {
+                $('.fb').parent().parent().remove();
+                $('.fb').remove();
+            }
+
+            if (tw) {
+                $('.tw').parent().parent().remove();
+                $('.tw').remove();
+            }
+
+            $('.sm').hover(function() {
+                $(this).toggleClass('hovering', 1000);
+                console.log('Hover');
+            })
+        });
 
