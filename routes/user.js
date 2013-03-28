@@ -159,20 +159,16 @@ function selectiveAdd(post, data, i, field, content, query) {
 
     //handling for plurals
     if (String(content).toLowerCase().contains(query)) {
-        console.log('C')
         post[field] = content;
     } else if (query.slice(l-2, l) == 'es') {
-        console.log('C2')
         if (String(content).toLowerCase().contains(query.slice(0, l-2))) {
             post[field] = content;
         }
     } else if (query[l-1] == 's') {
-        console.log('C1')
         if (String(content).toLowerCase().contains(query.slice(0, l-1))) {
             post[field] = content;
         }
     } else {
-        console.log('C3')
         post[field] = '';
     }
     return post
