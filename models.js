@@ -6,7 +6,8 @@ var userSchema = mongoose.Schema({
     tw_id: String,
     twitter_id: String,
     first_name: String,
-    last_name: String
+    last_name: String,
+    full_name: String
 })
 
 var User = mongoose.model('User', userSchema);
