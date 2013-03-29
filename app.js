@@ -27,7 +27,7 @@ app.configure(function(){
 });
 
 app.configure('development', function () {
-  app.set('host', 'recall-api.herokuapp.com/');
+  app.set('host', 'recall-api.herokuapp.com');
   app.use(express.errorHandler());
 });
 
