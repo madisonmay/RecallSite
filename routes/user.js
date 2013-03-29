@@ -5,7 +5,11 @@
 var Models = require('../models.js');
 var User = Models.User;
 
-String.prototype.contains = function(it) { return this.toLowerCase().indexOf(it.toLowerCase()) != -1; };
+String.prototype.contains = function(it) {
+    return ((this.toLowerCase().indexOf(it.toLowerCase()) != -1))};
+String.prototype.tw_contains = function(it) {
+    return ((this.toLowerCase().indexOf(' ' + it.toLowerCase()) != -1))};
+Array.prototype.append = function(array) { this.push.apply(this, array);}
 
 exports.list = function(req, res){
   res.send("respond with a resource");
@@ -104,7 +108,7 @@ exports.tw_login = function(req, res){
 
 exports.connect = function(req, res) {
     console.log(req.session.user);
-    res.render('connect', {'title': 'Connect', 'user': req.session.user});
+    res.render('connect', {'title': 'Connect', 'tw': req.twitter, 'fb': req.facebook});
 }
 
 exports.fb_connect = function(req, res) {
@@ -174,8 +178,8 @@ function selectiveAdd(post, data, i, field, content, query) {
     return post
 }
 
-exports.fb_search = function(req, res) {
-    console.log('req.facebook: ', req.facebook)
+var fb_search = function(req, res, callback) {
+    //Facebook search + parsing
     var url = '/me/home?q=' + req.query.q;
     req.facebook(url).get(function(err, data) {
 
@@ -191,6 +195,7 @@ exports.fb_search = function(req, res) {
                 post['type'] = 'facebook';
                 post['uid'] = data[i].from.id;
                 post['username'] = data[i].from.name;
+                post['pic'] = 'http://graph.facebook.com/' + data[i].from.id + '/picture?type=large'
                 l = req.query.q.length;
                 post = selectiveAdd(post, data, i, 'message', data[i].message, req.query.q);
                 if ('data' in data[i].comments) {
@@ -199,18 +204,28 @@ exports.fb_search = function(req, res) {
                     }
                 }
             }
-        res.send(filtered);
         }
+        for (var i=0; i<filtered.length; i++) {
+            if (!(filtered[i].message) && !(filtered[i].comment)) {
+                filtered.splice(i, 1);
+            }
+        }
+        console.log('Facebook search')
+        callback(filtered)
     });
 }
 
-exports.tw_search = function(req, res) {
+var tw_search = function(req, res, callback) {
+    //Twitter search + parsing
+    //Twitter does not support searching a users timeline,
+    //so only the last 200 tweets are considered.
     var url = 'statuses/home_timeline?count=200'
     req.twitter(url).get(function(err, data) {
 
         var filtered = []
-        data.forEach(function (tweet) {
-            if (tweet.text.contains(req.query.q)) {
+        for (var i=0; i<data.length; i++) {
+            tweet = data[i];
+            if (tweet.text.tw_contains(req.query.q)) {
                 filtered.push({});
                 var len = filtered.length;
                 var post = filtered[len-1];
@@ -219,25 +234,53 @@ exports.tw_search = function(req, res) {
                 post['uid'] = tweet.user.id;
                 post['username'] = tweet.user.name;
                 post['message'] = tweet.text;
+                post['pic'] = 'https://api.twitter.com/1/users/profile_image?screen_name=' + encodeURIComponent(tweet.user.screen_name) + '&size=bigger'
             }
-        });
-        res.send(filtered);
+        };
+        console.log('Twitter Search')
+        callback(filtered);
     });
 }
 
-// exports.search = function(req, res) {
-//     var result = []
-//     if (req.twitter) {
-//         var data = tw_search(req, res);
-//         data.forEach(function (tweet) {
-//             result.push(tweet);
-//         });
-//     }
-//     if (req.facebook) {
-//         var data = fb_search(req, res);
-//         data.forEach(function (post) {
-//             result.push(post);
-//         });
-//     }
-//     console.log(result)
-// }
+exports.search = function(req, res) {
+
+    //should ideally handle this section differently
+    //expandsion could not be done by handling
+    //all the social media permutations like this
+
+    var filtered = [];
+    var i = 0;
+    var total = 0;
+
+    var cb = function(data) {
+        //callback that handles all data
+        i += 1
+        console.log(data);
+        filtered.append(data);
+        if (i == total) {
+            res.send(filtered);
+        }
+    };
+
+    if (req.twitter) {
+        total += 1;
+    }
+
+    if (req.facebook) {
+        total += 1;
+    }
+
+    if (req.twitter) {
+        console.log('C1')
+        tw_search(req, res, cb);
+        if (req.facebook) {
+            fb_search(req, res, cb);
+        }
+    } else if (req.facebook) {
+        console.log('C2')
+        fb_search(req, res, cb);
+    } else {
+        console.log('C3')
+        console.log("No data")
+    }
+}

@@ -124,7 +124,7 @@ app.get('/facebook', loginRequired, user.fb_login);
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/connect', loginRequired, user.connect);
-app.get('/search', loginRequired, user.tw_search);
+app.get('/search', loginRequired, user.search);
 app.get('/fb_connect', loginRequired, user.fb_connect);
 app.get('/tw_connect', loginRequired, user.tw_connect);
 
