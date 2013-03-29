@@ -27,12 +27,12 @@ app.configure(function(){
 });
 
 app.configure('development', function () {
-  app.set('host', process.env.HOST);
+  app.set('host', 'http://recall-api.herokuapp.com/');
   app.use(express.errorHandler());
 });
 
 app.configure('production', function () {
-  app.set('host', process.env.HOST);
+  app.set('host', 'http://recall-api.herokuapp.com/');
 });
 
 var scope = {scope: ['read_stream']};
