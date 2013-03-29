@@ -265,14 +265,14 @@ exports.search = function(req, res) {
         filtered.append(data);
         if (i == total) {
             console.log(filtered)
-            res.send(filtered)
-            // res.render('search', {
-            //     title: 'Recall',
-            //     user: req.session.user,
-            //     query: req.query.q,
-            //     username: req.session.user.first_name,
-            //     posts: filtered
-            // })
+            // res.send(filtered)
+            res.render('search', {
+                title: 'Recall',
+                user: req.session.user,
+                query: req.query.q,
+                username: req.session.user.first_name,
+                posts: filtered
+            })
         }
     };
 

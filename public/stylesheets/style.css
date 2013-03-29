@@ -44,10 +44,25 @@ a {
     margin-bottom: 15px;
 }
 
-.centered {
+.centertext {
   text-align: center;
+}
+
+.centered {
   margin:auto;
   float:none;
+}
+
+.inlineLeft {
+  float:left;
+}
+
+.inlineRight {
+  float:right;
+}
+
+.clearBoth {
+  clear: both;
 }
 
 .botborder {
@@ -59,7 +74,7 @@ a {
 }
 
 .userlink {
-  font-size: 1.25em;
+  font-size: 1em;
   color: #333333;
   padding-left:10px;
 }
