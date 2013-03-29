@@ -1,17 +1,46 @@
 extends layout
 
 block content
-    div.title.well
-        | Connect more accounts
-    div.hero-unit.fixwidth.well
-        a(href='/login/facebook/')
-            img(id='loginbutton', src='images/facebok-icon.png')
-        a(href='/login/twitter/')
-            img(id='loginbutton', src='images/twitter-icon.png')
-        a(href='/login/gplus/')
-            img(id='loginbutton', src='images/gplus-icon.png')
+
+    div.centered
+        div.title
+            | Connect more accounts
+        div.fix
+            a(href='/connect/facebook/')
+                img.fb.sm(id='fb', src='images/facebok-icon.png')
+        div.fix
+            a(href='/connect/twitter/')
+                img.tw.sm(id='tw', src='images/twitter-icon.png')
+        div.fix
+            a(href='/connect/gplus/')
+                img.gp.sm(id='gp', src='images/gplus-icon.png')
+
     div.hero-unit.fixwidth.well
         p Having trouble remembering where that post was?
-        form(name='search, action='/search/facebook', method='get')
+        form(name='search', action='/search/facebook', method='get')
             | Search here! <input type='text' name='query.q')>
             input.btn(type='submit') Submit
+
+    script
+        $(document).ready(function() {
+            var fb = '#{fb}'
+            var tw = '#{tw}'
+            console.log(fb)
+            console.log(tw)
+            if (fb) {
+                $('.fb').parent().parent().remove();
+                $('.fb').remove();
+            }
+
+            if (tw) {
+                $('.tw').parent().parent().remove();
+                $('.tw').remove();
+            }
+
+            $('.sm').hover(function() {
+                $(this).toggleClass('hovering');
+                console.log('Hover');
+            })
+        });
+
+

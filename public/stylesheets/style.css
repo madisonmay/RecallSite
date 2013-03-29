@@ -33,7 +33,7 @@ a {
 }
 
 .fixwidth {
-    width: 30%;
+    width: 35%;
     margin: 0px auto;
     padding: 25px;
     margin-bottom: 15px;
@@ -69,3 +69,22 @@ a {
   color: #000000;
   text-align:left;
 }
+
+.sm {
+  margin: 10px auto;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.hovering {
+  width: 150px;
+  margin: 0px auto;
+  margin-top: -2px;
+}
+
+.fix {
+  margin: 0px auto;
+  min-width: 200px;
+  display: inline-block;
+}
+
