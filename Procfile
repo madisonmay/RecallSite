@@ -1,1 +1,1 @@
-web: node app.js
+web: foreman start

@@ -32,7 +32,7 @@ app.configure('development', function () {
 });
 
 app.configure('production', function () {
-  app.set('host', 'http://recall-api.herokuapp.com/');
+  app.set('host', process.env.HOST);
 });
 
 var scope = {scope: ['read_stream']};
