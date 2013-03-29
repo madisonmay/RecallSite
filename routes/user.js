@@ -184,13 +184,13 @@ var fb_search = function(req, res, callback) {
     req.facebook(url).get(function(err, data) {
 
         //processing statuses and comments
-        var filtered = []
+        var fb_filtered = []
         data = data.data
         for (var i=0; i<data.length; i++) {
             if (!('category' in data[i].from)){
-                filtered.push({});
-                var len = filtered.length;
-                var post = filtered[len-1];
+                fb_filtered.push({});
+                var len = fb_filtered.length;
+                var post = fb_filtered[len-1];
                 post['post_id'] = data[i].id
                 post['type'] = 'facebook';
                 post['uid'] = data[i].from.id;
@@ -205,21 +205,14 @@ var fb_search = function(req, res, callback) {
                 // }
             }
         }
-        for (var i=0; i<filtered.length; i++) {
-            if (!(filtered[i].message) && !(filtered[i].comment)) {
-                filtered.splice(i, 1);
+        for (var i=0; i<fb_filtered.length; i++) {
+            if (!(fb_filtered[i].message) && !(fb_filtered[i].comment)) {
+                fb_filtered.splice(i, 1);
             }
         }
-        console.log(filtered)
-        res.render('search', {
-            title: 'Recall',
-            user: req.session.user,
-            query: req.query.q,
-            username: req.session.user.first_name,
-            posts: filtered
-        })
+        console.log(fb_filtered)
         console.log('Facebook search')
-        callback(filtered)
+        callback(fb_filtered)
     });
 }
 
@@ -229,13 +222,13 @@ var tw_search = function(req, res, callback) {
     //so only the last 200 tweets are considered.
     var url = 'statuses/home_timeline?count=200'
     req.twitter(url).get(function(err, data) {
-        var filtered = []
+        var tw_filtered = []
         for (var i=0; i<data.length; i++) {
             tweet = data[i];
             if (tweet.text.tw_contains(req.query.q)) {
-                filtered.push({});
-                var len = filtered.length;
-                var post = filtered[len-1];
+                tw_filtered.push({});
+                var len = tw_filtered.length;
+                var post = tw_filtered[len-1];
                 post['post-id'] = tweet.id_str;
                 post['type'] = 'twitter';
                 post['uid'] = tweet.user.id;
@@ -245,7 +238,8 @@ var tw_search = function(req, res, callback) {
             }
         };
         console.log('Twitter Search')
-        callback(filtered);
+        console.log(tw_filtered);
+        callback(tw_filtered);
     });
 }
 
