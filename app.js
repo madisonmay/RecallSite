@@ -20,7 +20,7 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.cookieParser(process.env.COOKIE_SECRET));
+  app.use(express.cookieParser('2iaodg98heuhpdo09210359adoi'));
   app.use(express.session());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
@@ -51,13 +51,13 @@ app.configure('production', function () {
  */
 
 var twitter = rem.connect('twitter.com').configure({
-  key: process.env.TW_KEY,
-  secret: process.env.TW_SECRET
+  key: 'vsItuzcxhJUP3jMqOL0Q',
+  secret: 'ZGh3GeRe8x2m4GvqW1Rm7opuAGQSPpYNk5g6nL9ZTE'
 });
 
 var facebook = rem.connect('facebook.com').configure({
-  key: process.env.FB_APPID,
-  secret: process.env.FB_SECRET
+  key: '494199227306977',
+  secret: '0ee26ad282f94e0794109910218d946e'
 });
 
 var tw_oauth = rem.oauth(twitter, 'http://' + app.get('host') + '/oauth/twitter');
