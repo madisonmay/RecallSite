@@ -57,6 +57,10 @@ a {
   float:left;
 }
 
+.inlineCenter {
+  float:center;
+}
+
 .inlineRight {
   float:right;
 }
@@ -70,11 +74,12 @@ a {
   border-radius: 5px;
   border-bottom: 1px solid #CCCCCC;
   padding: 5px;
-  margin-bottom: 5px;
+  padding-bottom: 0px;
+  margin-bottom: 1em;
 }
 
 .userlink {
-  font-size: 1em;
+  font-size: 1.5em;
   color: #333333;
   padding-left:10px;
 }
@@ -83,6 +88,7 @@ a {
   font-size: 1em;
   color: #000000;
   text-align:left;
+  padding-left: 10px;
 }
 
 .sm {
@@ -103,3 +109,11 @@ a {
   display: inline-block;
 }
 
+.messageDiv {
+  max-width: 60em;
+}
+
+.vertAlign {
+  position: inherit;
+  top: 50%;
+}

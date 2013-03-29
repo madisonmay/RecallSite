@@ -1,7 +1,7 @@
-h2.centered Posts
+h2.centertext Posts
 
 if (posts == false || posts.length == 0)
-  h4.center No posts were found!
+  h4.centertext No posts were found!
 else
   for post in posts
     if (post.message.length > 0)
@@ -14,9 +14,9 @@ else
             div.inlineRight
               a.pull-right(href='http://www.twitter.com/'+post.post_id)
                   img(src='/images/twitter-icon.png', style='width:2em;height:2em;margin-top:-5px')
-          div.inlineLeft
+          div.inlineLeft.vertAlign
             a(href='https://www.facebook.com/'+post.uid)
                 img(src='https://graph.facebook.com/'+post.uid+'/picture')
-          div.inlineLeft        
+          div.inlineLeft.messageDiv        
             a.userlink(href='http://www.facebook.com/'+post.uid) #{post.username}
-          p.message.inline.left #{post.message}
+            p.message #{post.message}
