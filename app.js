@@ -27,7 +27,7 @@ app.configure(function(){
 });
 
 app.configure('development', function () {
-  app.set('host', 'localhost:'  + process.env.PORT);
+  app.set('host', process.env.HOST);
   app.use(express.errorHandler());
 });
 
@@ -36,15 +36,6 @@ app.configure('production', function () {
 });
 
 var scope = {scope: ['read_stream']};
-
-app.configure('development', function () {
-  app.set('host', 'localhost:' + process.env.PORT);
-  app.use(express.errorHandler());
-});
-
-app.configure('production', function () {
-  app.set('host', process.env.HOST);
-});
 
 /**
  * Setup Twitter and Facebook
