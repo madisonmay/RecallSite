@@ -200,7 +200,7 @@ var fb_search = function(req, res, callback) {
                 post = selectiveAdd(post, data, i, 'message', data[i].message, req.query.q);
                 if ('data' in data[i].comments) {
                     for (var j=0; j<data[i].comments.data.length; j++) {
-                        post = selectiveAdd(post, data, j, 'comment', data[i].comments.data[j].message, req.query.q);
+                        post = selectiveAdd(post, data, j, 'message', data[i].comments.data[j].message, req.query.q);
                     }
                 }
             }
