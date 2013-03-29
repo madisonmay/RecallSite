@@ -4,17 +4,17 @@ block scripts
 	script
 
 block content
-	div.title.well
+	div.title(style="margin-bottom: 40px;")
 		| <b> Recall </b>
 	div.span4.well
 		div.span4.centered
 			if (user.fb_id)
 				a.pull-left(href='http://www.facebook.com/'+user.fb_id)
-					img(src='http://graph.facebook.com/'+user.fb_id+'/picture')
+					img(src='http://graph.facebook.com/'+user.fb_id+'/picture', style='border-radius:10px;')
 				a.pull-right(href='http://www.facebook.com/',style='margin:auto')
-					img(src='/images/facebok-icon.png', style='width:2em;height:2em;margin-top:-5px')
+					img(src='/images/facebok-icon.png', style='width:2em;height:2em;margin-top:-5px;border-radius:5px;')
 			h3 #{username}
-		div.square.botborder
+		div.square.botborder(style="text-align: center")
 			h4 Searching for: #{query}
 	div.span12.well
 		include _posts.jade

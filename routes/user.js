@@ -198,11 +198,11 @@ var fb_search = function(req, res, callback) {
                 post['pic'] = 'http://graph.facebook.com/' + data[i].from.id + '/picture?type=large'
                 l = req.query.q.length;
                 post = selectiveAdd(post, data, i, 'message', data[i].message, req.query.q);
-                if ('data' in data[i].comments) {
-                    for (var j=0; j<data[i].comments.data.length; j++) {
-                        post = selectiveAdd(post, data, j, 'message', data[i].comments.data[j].message, req.query.q);
-                    }
-                }
+                // if ('data' in data[i].comments) {
+                //     for (var j=0; j<data[i].comments.data.length; j++) {
+                //         post = selectiveAdd(post, data, j, 'message', data[i].comments.data[j].message, req.query.q);
+                //     }
+                // }
             }
         }
         for (var i=0; i<filtered.length; i++) {
@@ -265,14 +265,14 @@ exports.search = function(req, res) {
         filtered.append(data);
         if (i == total) {
             console.log(filtered)
-            res.send(filtered)
-            // res.render('search', {
-            //     title: 'Recall',
-            //     user: req.session.user,
-            //     query: req.query.q,
-            //     username: req.session.user.first_name,
-            //     posts: filtered
-            // })
+            // res.send(filtered)
+            res.render('search', {
+                title: 'Recall',
+                user: req.session.user,
+                query: req.query.q,
+                username: req.session.user.first_name,
+                posts: filtered
+            })
         }
     };
 
