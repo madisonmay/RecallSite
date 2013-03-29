@@ -8,7 +8,7 @@ var User = Models.User;
 String.prototype.contains = function(it) {
     return ((this.toLowerCase().indexOf(it.toLowerCase()) != -1))};
 String.prototype.tw_contains = function(it) {
-    return ((this.toLowerCase().indexOf(' ' + it.toLowerCase()) != -1))};
+    return ((this.toLowerCase().indexOf(' ' + it.toLowerCase() + ' ') != -1))};
 Array.prototype.append = function(array) { this.push.apply(this, array);}
 
 exports.list = function(req, res){
@@ -241,7 +241,7 @@ var tw_search = function(req, res, callback) {
                 post['uid'] = tweet.user.id;
                 post['username'] = tweet.user.name;
                 post['message'] = tweet.text;
-                post['pic'] = 'https://api.twitter.com/1/users/profile_image?screen_name=' + encodeURIComponent(tweet.user.screen_name) + '&size=bigger'
+                post['pic'] = 'https://api.twitter.com/1/users/profile_image?screen_name=' + encodeURIComponent(tweet.user.screen_name)
             }
         };
         console.log('Twitter Search')

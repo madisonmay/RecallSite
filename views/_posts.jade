@@ -9,14 +9,19 @@ else
           if (post.type == 'facebook')
             div.inlineRight
               a.pull-right(href='http://www.facebook.com/'+post.post_id)
-                  img(src='/images/facebok-icon.png', style='width:2em;height:2em;margin-top:-5px')
+                  img(src='/images/facebok-icon.png', style='width:2em;height:2em;margin-top:-5px;border-radius: 5px')
+            div.inlineLeft
+              a(href='https://www.facebook.com/'+post.uid)
+                img(src='https://graph.facebook.com/'+post.uid+'/picture?', style='width: 50px;border-radius: 5px; margin-right: 10px')
+            div.inlineLeft
+              a.userlink(href='http://www.facebook.com/'+post.uid, style='margin-left: -7px; margin-right: 10px') #{post.username}
           if (post.type == 'twitter')
             div.inlineRight
               a.pull-right(href='http://www.twitter.com/'+post.post_id)
-                  img(src='/images/twitter-icon.png', style='width:2em;height:2em;margin-top:-5px')
-          div.inlineLeft
-            a(href='https://www.facebook.com/'+post.uid)
-                img(src='https://graph.facebook.com/'+post.uid+'/picture')
-          div.inlineLeft        
-            a.userlink(href='http://www.facebook.com/'+post.uid) #{post.username}
+                  img(src='/images/twitter-icon.png', style='width:2em;height:2em;margin-top:5px: border-radius: 5px')
+            div.inlineLeft
+              a(href='https://www.twitter.com/'+post.uid)
+                img(src='#{post.pic}', style='border-radius: 5px: max-width:; margin-right: 10px')
+            div.inlineLeft
+              a.userlink(href='http://www.twitter.com/'+post.uid, style='margin-left: -7px; margin-right: 10px') #{post.username}
           p.message.inline.left #{post.message}

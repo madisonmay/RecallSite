@@ -10,10 +10,14 @@ block content
 		div.span4.centered
 			if (user.fb_id)
 				a.pull-left(href='http://www.facebook.com/'+user.fb_id)
-					img(src='http://graph.facebook.com/'+user.fb_id+'/picture', style='border-radius:10px;')
-				a.pull-right(href='http://www.facebook.com/',style='margin:auto')
-					img(src='/images/facebok-icon.png', style='width:2em;height:2em;margin-top:-5px;border-radius:5px;')
-			h3 #{username}
+					img(src='http://graph.facebook.com/'+user.fb_id+'/picture', style='border-radius:5px; margin-right: 15px; width: 25px;')
+				if (user.fb_id)
+					a.pull-right(href='http://www.facebook.com/',style='margin:auto')
+						img(src='/images/facebok-icon.png', style='width:2em;height:2em;margin-top:-5px;margin-top:10px')
+				if (user.tw_id)
+					a.pull-right(href='http://www.twitter.com/',style='margin:auto')
+						img(src='/images/twitter-icon.png', style='width:2em;height:2em;margin-top:-5px;margin-top:10px')
+			h3(style="margin-left: 15px;") #{username}
 		div.square.botborder(style="text-align: center")
 			h4 Searching for: #{query}
 	div.span12.well

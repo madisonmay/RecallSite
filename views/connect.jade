@@ -17,9 +17,9 @@ block content
 
     div.hero-unit.fixwidth(style="margin-top: 30px")
         p Having trouble remembering where that post was?
-        form(name='search', action='/search/facebook', method='get')
-            | <input type='text', placeholder='Search...' name='query.q')>
-            input.btn.btn-success(style="margin-top: -15px; margin-left: 15px; max-width: 55px;", value='Submit')
+        form(name='search', action='/search', method='get')
+            | <input type='text', placeholder='Search...' name='q')>
+            input.btn.btn-success(style="margin-top: -15px; margin-left: 15px;", type='submit', value='Submit')
 
     script
         $(document).ready(function() {
