@@ -112,6 +112,7 @@ a {
 .messageDiv {
   max-width: 48em;
   margin-top: 5px;
+  margin-bottom: -20px;
 }
 
 .vertAlign {
