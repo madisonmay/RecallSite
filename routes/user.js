@@ -210,6 +210,14 @@ var fb_search = function(req, res, callback) {
                 filtered.splice(i, 1);
             }
         }
+        console.log(filtered)
+        res.render('search', {
+            title: 'Recall',
+            user: req.session.user,
+            query: req.query.q,
+            username: req.session.user.first_name,
+            posts: filtered
+        })
         console.log('Facebook search')
         callback(filtered)
     });
@@ -221,7 +229,6 @@ var tw_search = function(req, res, callback) {
     //so only the last 200 tweets are considered.
     var url = 'statuses/home_timeline?count=200'
     req.twitter(url).get(function(err, data) {
-
         var filtered = []
         for (var i=0; i<data.length; i++) {
             tweet = data[i];
@@ -255,10 +262,17 @@ exports.search = function(req, res) {
     var cb = function(data) {
         //callback that handles all data
         i += 1
-        console.log(data);
         filtered.append(data);
         if (i == total) {
-            res.send(filtered);
+            console.log(filtered)
+            res.send(filtered)
+            // res.render('search', {
+            //     title: 'Recall',
+            //     user: req.session.user,
+            //     query: req.query.q,
+            //     username: req.session.user.first_name,
+            //     posts: filtered
+            // })
         }
     };
 

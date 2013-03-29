@@ -46,6 +46,28 @@ a {
 
 .centered {
   text-align: center;
+  margin:auto;
+  float:none;
+}
+
+.botborder {
+  background-color: #999999;
+  border-radius: 5px;
+  border-bottom: 1px solid #CCCCCC;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.userlink {
+  font-size: 1.25em;
+  color: #333333;
+  padding-left:10px;
+}
+
+.message {
+  font-size: 1em;
+  color: #000000;
+  text-align:left;
 }
 
 .sm {
@@ -65,3 +87,4 @@ a {
   min-width: 200px;
   display: inline-block;
 }
+

@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
     div.centered
         div.title
             | Connect more accounts
@@ -13,6 +14,12 @@ block content
         div.fix
             a(href='/connect/gplus/')
                 img.gp.sm(id='gp', src='images/gplus-icon.png')
+
+    div.hero-unit.fixwidth.well
+        p Having trouble remembering where that post was?
+        form(name='search', action='/search/facebook', method='get')
+            | Search here! <input type='text' name='query.q')>
+            input.btn(type='submit') Submit
 
     script
         $(document).ready(function() {
@@ -31,8 +38,9 @@ block content
             }
 
             $('.sm').hover(function() {
-                $(this).toggleClass('hovering', 1000);
+                $(this).toggleClass('hovering');
                 console.log('Hover');
             })
         });
+
 

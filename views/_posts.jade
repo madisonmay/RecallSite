@@ -1,0 +1,16 @@
+h2.centered Posts
+
+if (posts == false || posts.length == 0)
+  h4.center No posts were found!
+else
+  for post in posts
+      div.square.botborder.row.centered
+        div.span4.pull-left
+            if (post.type == 'facebook')
+                a.pull-right(href='http://www.facebook.com/'+post.post_id)
+                    img(src='/images/facebok-icon.png', style='width:2em;height:2em;margin-top:-5px')
+                a(href='https://www.facebook.com/'+post.uid)
+                    img(src='https://graph.facebook.com/'+post.uid+'/picture')
+                a.userlink(href='http://www.facebook.com/'+post.uid) #{post.username}
+        div.span7(style='margin-bottom:-10px')
+           p.message #{post.message}
