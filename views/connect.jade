@@ -3,7 +3,7 @@ extends layout
 block content
 
     div.centertext
-        div.title
+        div.title(style="height: 80px")
             | Connect more accounts
         div.fix
             a(href='/connect/facebook/')
@@ -15,11 +15,11 @@ block content
             a(href='/connect/gplus/')
                 img.gp.sm(id='gp', src='images/gplus-icon.png')
 
-    div.hero-unit.fixwidth.well
+    div.hero-unit.fixwidth(style="margin-top: 30px")
         p Having trouble remembering where that post was?
         form(name='search', action='/search/facebook', method='get')
-            | Search here! <input type='text' name='query.q')>
-            input.btn(type='submit') Submit
+            | <input type='text', placeholder='Search...' name='query.q')>
+            input.btn.btn-success(style="margin-top: -15px; margin-left: 15px; max-width: 55px;", value='Submit')
 
     script
         $(document).ready(function() {

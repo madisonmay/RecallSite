@@ -8,7 +8,6 @@ html {
 
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url('/images/bedge_grunge.png');
 }
 
@@ -30,6 +29,7 @@ a {
 .title {
     font-size: 72px;
     text-align: center;
+    font-family: 'Gabriela', serif;
 }
 
 .fixwidth {
@@ -110,7 +110,7 @@ a {
 }
 
 .messageDiv {
-  max-width: 60em;
+  max-width: 50em;
 }
 
 .vertAlign {
