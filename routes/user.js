@@ -118,12 +118,14 @@ exports.fb_connect = function(req, res) {
             console.log(err)
         } else {
 
-            User.update({_id : req.session.user._id}, {fb_id: user.id}, function(err, db_user) {
+            User.update({_id : req.session.user._id}, {fb_id: user.id}, function(err) {
                 //User in database
                 if (!err) {
                     console.log('User id: ', user.id)
-                    req.session.user = db_user;
-                    res.redirect('/connect')
+                    User.findOne({_id : req.session.user._id}, function(err, db_user) {
+                        req.session.user = db_user
+                        res.redirect('/connect');
+                    });
                 }
 
                 //Something else unexpected happens
@@ -141,13 +143,15 @@ exports.tw_connect = function(req, res) {
         if (err) {
             console.log(err)
         } else {
-            User.update({_id : req.session.user._id}, {tw_id: user.id}, function(err, db_user) {
+            User.update({_id : req.session.user._id}, {tw_id: user.id}, function(err) {
 
                 //User in database
                 if (!err) {
                     console.log('User id: ', user.id)
-                    req.session.user = db_user;
-                    res.redirect('/connect');
+                    User.findOne({_id : req.session.user._id}, function(err, db_user) {
+                        req.session.user = db_user
+                        res.redirect('/connect');
+                    });
                 }
 
                 //Something else unexpected happens

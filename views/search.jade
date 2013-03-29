@@ -12,7 +12,10 @@ block content
 				a.pull-left(href='http://www.facebook.com/'+user.fb_id)
 					img(src='http://graph.facebook.com/'+user.fb_id+'/picture', style='border-radius:10px;')
 				a.pull-right(href='http://www.facebook.com/',style='margin:auto')
-					img(src='/images/facebok-icon.png', style='width:2em;height:2em;margin-top:-5px;border-radius:5px;')
+					img(src='/images/facebok-icon.png', style='width:2em;height:2em;margin-top:10px;border-radius:5px;')
+			if (user.tw_id)
+				a.pull-right(href='http://www.twitter.com/',style='margin:auto')
+					img(src='/images/twitter-icon.png', style='width:2em;height:2em;margin-top:10px;border-radius:5px;')
 			div.centertext
 				h3 #{username}
 		div.square.botborder(style="text-align: center")
